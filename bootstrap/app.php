@@ -15,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'http://127.0.0.1:8000/create/user',
         ]);
     })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->validateCsrfTokens(except: [
+            'http://127.0.0.1:8000/user/54'
+        ]);
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
